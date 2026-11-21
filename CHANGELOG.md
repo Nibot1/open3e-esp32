@@ -13,6 +13,19 @@ bis dahin auf der Flash-Seite lag.
 
 ### Hinzugefügt
 
+- **MQTT-Kommandos für open3e-ha.** `system` veröffentlicht erkannte
+  Geräte und beim DID-Scan gefundene bekannte Datenpunkte mit ihren Topics
+  auf `<Basis>/system`. Neu sind außerdem `read-json`, `read-raw`,
+  `read-pure`, `read-all` und `read-all-json` sowie ECU- und Teilfeldadressen
+  und Schreibbefehle als `[DID, Wert]`-Paare. Die bisherige Schreibweise als
+  Objekt bleibt erhalten. Der retained LWT mit `online`/`offline` bleibt
+  bestehen; Fehler beim Veröffentlichen von `online` werden protokolliert.
+  Raw-Schreibbefehle und Service `0x77` bleiben deaktiviert, daher sind
+  open3e-ha-Funktionen, die `write-raw` benötigen, nicht verfügbar.
+  `read` und `read-json` liefern beide JSON; `read-all` und `read-all-json`
+  lesen beide alle DIDs der lokalen Datenbank. Einzelheiten und Einrichtung
+  stehen unter [MQTT](README.md#mqtt).
+
 - **Schreibgrenzen je Datenpunkt.** Neue Spalte „Grenzen" in der
   Datenpunkttabelle (`10..60`, `..60`, `Comfort: 10..60`; Feld `range` in
   `points.json`). Home Assistant bekommt den Bereich als `min`/`max` seiner
